@@ -15,8 +15,12 @@ body {
 
 table {
   width: 90%;
-  margin: 0 auto;  
+  margin: 0 auto;
   border: 1px dotted black;
+}
+
+h1 {
+  text-align: center;
 }
 
 td {
