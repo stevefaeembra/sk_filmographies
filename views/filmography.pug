@@ -2,24 +2,25 @@ doctype html
 html(lang='en')
   head
    title WikiData Film API by Stevefaeembra
-   link(rel="stylesheet" href="css/style.css")
+   link(rel="stylesheet" href="../css/style.css")
   body
     h1
       = "Filmography for "+data.name
     table
       thead
         th
-          | Film 
-        th
-          | Year 
-        th
           | Month
+        th
+          | Year
+        th
+          | Film         
       tbody
         - for (var film of data.filmography)
           tr
-            td
-              = film.filmName
-            td
-              = film.year 
             td 
               = film.month
+            td
+              = film.year 
+            td
+              = film.filmName
+            

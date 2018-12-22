@@ -8,3 +8,22 @@ html {
   font-size: 16px;
   background-color: wheat;
 }
+
+body {
+
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;  
+  border: 1px dotted black;
+}
+
+td {
+  padding: .25rem;
+}
+
+th {
+  font-weight: bolder;
+  text-align: left;
+}

@@ -109,10 +109,11 @@ Query.prototype.simplifyReturnedFilmography = function (filmography) {
     const date = binding.date.value;
     const year=parseInt(date.substring(0,5));
     const month=parseInt(date.substring(5,7));
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     result.push({
       filmName: filmName,
       year: year,
-      month: month
+      month: monthNames[month]
     });
   });
   return result;
