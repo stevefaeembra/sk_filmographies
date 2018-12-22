@@ -15,7 +15,7 @@ html(lang='en')
         th
           | Film         
       tbody
-        - let currentYear = data.filmography[0].year
+        - let currentYear = data.filmography[0].year-1
         - for (var film of data.filmography)
           - let year = film.year
           - if (year>currentYear) {
