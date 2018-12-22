@@ -9,9 +9,9 @@ html(lang='en')
     table
       thead
         th
-          | Month
-        th
           | Year
+        th
+          | Month
         th
           | Film         
       tbody
@@ -19,19 +19,19 @@ html(lang='en')
         - for (var film of data.filmography)
           - let year = film.year
           - if (year>currentYear) {
-            tr(class="newYear")
-              td 
-                = film.month
+            tr(class="newYear")              
               td
                 = film.year 
+              td 
+                = film.month
               td(class="filmName")
                 = film.filmName
           -} else {
             tr 
-              td 
-                = film.month
               td
                 = film.year 
+              td 
+                = film.month
               td(class="filmName")
                 = film.filmName
           - }            

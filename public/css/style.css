@@ -24,6 +24,7 @@ h1 {
 
 td {
   padding: .25rem;
+  margin: 0;
 }
 
 td.filmName {
