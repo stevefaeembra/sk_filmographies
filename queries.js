@@ -40,8 +40,10 @@ Query.prototype.getFilmsForActorId = function (actorId) {
 
   // returns list of films in chronologic order
   // given the person id
+
   var authorQid = actorId;
-  var sparql = `SELECT ?item ?itemLabel (MIN(?date) AS ?date)
+  var sparql = `
+  SELECT ?item ?itemLabel (MIN(?date) AS ?date)
   WHERE {
     ?item wdt:P161 wd:${authorQid};
         wdt:P577 ?date
@@ -67,7 +69,12 @@ Query.prototype.getFilmsForActorId = function (actorId) {
   });
 };
 
+
 Query.prototype.getFilmsForActor = function (actorName) {
+
+  // get films for an actor name
+  // chains two SPARL queries together
+
   return new Promise((resolve,reject) => {
     this.getActorId(actorName)
     .then((data) => {
@@ -79,7 +86,7 @@ Query.prototype.getFilmsForActor = function (actorName) {
       console.log("Got filmography")
       resolve({
         name : actorName,
-        filmography: filmography
+        filmography: this.simplifyReturnedFilmography(filmography)
       });
     })
     .catch((err) => {
@@ -88,6 +95,23 @@ Query.prototype.getFilmsForActor = function (actorName) {
       })
     })
   });
+};
+
+Query.prototype.simplifyReturnedFilmography = function (filmography) {
+
+  // simplifies filmography structure, flattens out the deeply nested return
+  // from WikiData.
+
+  let result = [];
+  filmography.results.bindings.forEach((binding) => {
+    const filmName = binding.itemLabel.value;
+    const date = binding.date.value;
+    result.push({
+      filmName: filmName,
+      date: date
+    });
+  });
+  return result;
 };
 
 module.exports = Query;
