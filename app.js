@@ -36,10 +36,11 @@ app.get("/filmography/:actorname", (req,res) => {
   const actorName = req.params["actorname"];
   lookup.getFilmsForActor(actorName)
   .then((data) => {
-    res.json(data);
+    console.log(data);
+    res.render("filmography",{data:data});
   })
   .catch((error) => {
-    res.json(error);
+    res.json(error)
   })
 });
 
