@@ -1,7 +1,7 @@
 {
   "name": "movie-timelines",
   "version": "1.0.0",
-  "description": "",
+  "description": "Find actor's filmography using WikiData and SparQL queries",
   "main": "app.js",
   "dependencies": {
     "express": "^4.16.4",
