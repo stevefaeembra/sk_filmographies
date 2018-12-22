@@ -15,12 +15,24 @@ html(lang='en')
         th
           | Film         
       tbody
+        - let currentYear = data.filmography[0].year
         - for (var film of data.filmography)
-          tr
-            td 
-              = film.month
-            td
-              = film.year 
-            td(class="filmName")
-              = film.filmName
-            
+          - let year = film.year
+          - if (year>currentYear) {
+            tr(class="newYear")
+              td 
+                = film.month
+              td
+                = film.year 
+              td(class="filmName")
+                = film.filmName
+          -} else {
+            tr 
+              td 
+                = film.month
+              td
+                = film.year 
+              td(class="filmName")
+                = film.filmName
+          - }            
+          - currentYear = year  

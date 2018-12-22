@@ -16,7 +16,6 @@ body {
 table {
   width: 90%;
   margin: 0 auto;
-  border: 1px dotted black;
 }
 
 h1 {
@@ -34,4 +33,9 @@ td.filmName {
 th {
   font-weight: bolder;
   text-align: left;
+}
+
+tr.newYear td {
+  /* height: 10px; */
+  border-top: 2px solid black;
 }
