@@ -59,12 +59,34 @@ Query.prototype.getFilmsForActorId = function (actorId) {
         body += data;
       });
       res.on("end", () => {
-
         body = JSON.parse(body);
         console.log(body);
         resolve(body);
       });
     });
+  });
+};
+
+Query.prototype.getFilmsForActor = function (actorName) {
+  return new Promise((resolve,reject) => {
+    this.getActorId(actorName)
+    .then((data) => {
+      console.log("Got actor id")
+      const actorId = data;
+      return this.getFilmsForActorId(data);
+    })
+    .then((filmography) => {
+      console.log("Got filmography")
+      resolve({
+        name : actorName,
+        filmography: filmography
+      });
+    })
+    .catch((err) => {
+      reject({
+        error: err
+      })
+    })
   });
 };
 

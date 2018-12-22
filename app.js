@@ -3,18 +3,22 @@ const pug = require("pug");
 const app = express();
 const Query = require("./queries");
 
+// app config
+
 var router = express.Router();
 app.use('/', router);
-
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
+
+// endpoints
 
 app.get("/", (req,res) => {
   res.render("homepage",{});
 });
 
 app.get("/id/:actorname", (req,res) => {
+  // gets id for an actor by name
   const lookup = new Query();
   const actorName = req.params["actorname"];
   lookup.getActorId(actorName)
@@ -27,21 +31,15 @@ app.get("/id/:actorname", (req,res) => {
 });
 
 app.get("/filmography/:actorname", (req,res) => {
+  // gets filmography of an actor by name
   const lookup = new Query();
   const actorName = req.params["actorname"];
-  lookup.getActorId(actorName)
+  lookup.getFilmsForActor(actorName)
   .then((data) => {
-    console.log(`Querying filmography for ${data}`)
-    return lookup.getFilmsForActorId(data);
+    res.json(data);
   })
-  .then((films) => {
-    res.json({
-      name: actorName,
-      filmography: films
-    })
-  })
-  .catch((err) => {
-    console.log(err);
+  .catch((error) => {
+    res.json(error);
   })
 });
 
