@@ -14,7 +14,7 @@ app.get("/", (req,res) => {
   res.render("homepage",{});
 });
 
-app.get("/id-for/:actorname", (req,res) => {
+app.get("/id/:actorname", (req,res) => {
   const lookup = new Query();
   const actorName = req.params["actorname"];
   lookup.getActorId(actorName)
@@ -23,6 +23,25 @@ app.get("/id-for/:actorname", (req,res) => {
       name: actorName,
       unid: data
     });
+  })
+});
+
+app.get("/filmography/:actorname", (req,res) => {
+  const lookup = new Query();
+  const actorName = req.params["actorname"];
+  lookup.getActorId(actorName)
+  .then((data) => {
+    console.log(`Querying filmography for ${data}`)
+    return lookup.getFilmsForActorId(data);
+  })
+  .then((films) => {
+    res.json({
+      name: actorName,
+      filmography: films
+    })
+  })
+  .catch((err) => {
+    console.log(err);
   })
 });
 
