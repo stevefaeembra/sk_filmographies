@@ -16,9 +16,13 @@ app.get("/", (req,res) => {
 
 app.get("/id-for/:actorname", (req,res) => {
   const lookup = new Query();
-  lookup.getActorId("Natalie Portman")
+  const actorName = req.params["actorname"];
+  lookup.getActorId(actorName)
   .then((data) => {
-    res.json(data);
+    res.json({
+      name: actorName,
+      unid: data
+    });
   })
 });
 
