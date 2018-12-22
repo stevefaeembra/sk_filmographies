@@ -97,6 +97,7 @@ Query.prototype.getFilmsForActor = function (actorName) {
   });
 };
 
+
 Query.prototype.simplifyReturnedFilmography = function (filmography) {
 
   // simplifies filmography structure, flattens out the deeply nested return
@@ -106,9 +107,12 @@ Query.prototype.simplifyReturnedFilmography = function (filmography) {
   filmography.results.bindings.forEach((binding) => {
     const filmName = binding.itemLabel.value;
     const date = binding.date.value;
+    const year=parseInt(date.substring(0,5));
+    const month=parseInt(date.substring(5,7));
     result.push({
       filmName: filmName,
-      date: date
+      year: year,
+      month: month
     });
   });
   return result;
