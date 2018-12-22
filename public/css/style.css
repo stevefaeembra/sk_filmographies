@@ -27,6 +27,10 @@ td {
   padding: .25rem;
 }
 
+td.filmName {
+  font-weight: bolder;
+}
+
 th {
   font-weight: bolder;
   text-align: left;
