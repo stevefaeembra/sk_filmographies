@@ -17,6 +17,23 @@ app.get("/", (req,res) => {
   res.render("homepage",{});
 });
 
+app.get("/film/:filmname", (req,res) => {
+  const lookup = new Query();
+  const filmName = req.params["filmname"];
+  lookup.getEntityId(filmName)
+  .then((filmId) => {
+    return lookup.getFilmInfoFromId(filmId);
+  })
+  .then((data) => {
+    res.json(data);
+  })
+  .catch((err) => {
+    res.json({
+      error: `Can't find "${entityName}"`
+    });
+  })
+});
+
 app.get("/id/:entityname", (req,res) => {
   // gets id for an entiry (actor or film)
   const lookup = new Query();

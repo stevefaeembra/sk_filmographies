@@ -5,6 +5,32 @@ const Query = function() {
 
 }
 
+
+Query.prototype.getFilmInfoFromId = function (filmId) {
+
+  // get known data about a film from its id
+
+  const url = wdk.getEntities({
+    ids: [filmId],
+    languages: ['en'], // returns all languages if not specified
+    props: ['info', 'claims'], // returns all data if not specified
+    format: 'json' // defaults to json
+  });
+  return new Promise( (resolve, reject) => {
+    https.get(url, res => {
+      res.setEncoding("utf8");
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("end", () => {
+        body = JSON.parse(body);
+        resolve(body);
+      });
+    });
+  });
+};
+
 Query.prototype.getEntityId = function (entityName) {
 
     // returns entity ID for person with that name
