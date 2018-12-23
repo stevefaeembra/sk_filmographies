@@ -39,8 +39,9 @@ app.get("/film/:filmname", (req,res) => {
 
 app.get("/cast/:filmname", (req,res) => {
 
-  // gets a list of actors in the film
-  // returns an array of wikidata IDs
+  // finds actors for the given film name
+  // film name is case sensitive and needs to match exactly the
+  // name in wikipedia
 
   const lookup = new Query();
   const filmName = req.params["filmname"];
@@ -108,7 +109,6 @@ app.get("/filmography/:actorname", (req,res) => {
   const actorName = req.params["actorname"];
   lookup.getFilmsForActor(actorName)
   .then((data) => {
-    console.log(data);
     res.render("filmography",{data:data});
   })
   .catch((error) => {

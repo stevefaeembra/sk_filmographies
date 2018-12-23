@@ -136,7 +136,6 @@ Query.prototype.getFilmsForActorId = function (actorId) {
   } GROUP BY ?item ?itemLabel
   ORDER BY (?date)
   `;
-  console.log(sparql);
   var url = wdk.sparqlQuery(sparql);
   return new Promise( (resolve, reject) => {
     https.get(url, res => {
@@ -147,7 +146,6 @@ Query.prototype.getFilmsForActorId = function (actorId) {
       });
       res.on("end", () => {
         body = JSON.parse(body);
-        console.log(body);
         resolve(body);
       });
     });
@@ -161,14 +159,12 @@ Query.prototype.getFilmsForActor = function (actorName) {
   // chains two SPARL queries together
 
   return new Promise((resolve,reject) => {
-    this.getActorId(actorName)
+    this.getEntityId(actorName)
     .then((data) => {
-      console.log("Got actor id")
       const actorId = data;
       return this.getFilmsForActorId(data);
     })
     .then((filmography) => {
-      console.log("Got filmography")
       resolve({
         name : actorName,
         filmography: this.simplifyReturnedFilmography(filmography)
