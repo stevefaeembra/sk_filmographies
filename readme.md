@@ -8,7 +8,7 @@ Lookup Filmography of an Artist
 
 ![screenshot showing filmography of Harrison Ford](./images/screenshot.png)
 
-Endpoint is
+Endpoint is 
 
 ```
 /filmography/:actor_name
