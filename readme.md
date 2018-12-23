@@ -3,12 +3,12 @@ Filmography Finder
 
 This is a simple Node.js/express app to find the filmographies of Actors using WikiData and SparQL queries.
 
-Lookup Filmography of an Artist
+Filmography of an Artist
 ===============================
 
-![screenshot showing filmography of Harrison Ford](./images/screenshot.png)
+![screenshot filmography](./images/screenshot.png)
 
-Endpoint is 
+Endpoint is
 
 ```
 /filmography/:actor_name
@@ -21,7 +21,7 @@ Looking up cast of a film
 
 Note that the lookup is case sensitive, and needs to match EXACTLY the name as shown on Wikipedia/Wikidata. You might need to copy and paste from Wikipedia to be sure, especially for films with complex titles like the Star Wars movies :)
 
-![screenshot showing the cast of The Shining](./images/screenshot2.png)
+![screenshot showing cast](./images/screenshot2.png)
 
 endpoint is
 
