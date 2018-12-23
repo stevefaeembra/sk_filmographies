@@ -17,15 +17,20 @@ app.get("/", (req,res) => {
   res.render("homepage",{});
 });
 
-app.get("/id/:actorname", (req,res) => {
-  // gets id for an actor by name
+app.get("/id/:entityname", (req,res) => {
+  // gets id for an entiry (actor or film)
   const lookup = new Query();
-  const actorName = req.params["actorname"];
-  lookup.getActorId(actorName)
+  const entityName = req.params["entityname"];
+  lookup.getEntityId(entityName)
   .then((data) => {
     res.json({
-      name: actorName,
+      name: entityName,
       unid: data
+    });
+  })
+  .catch((err) => {
+    res.json({
+      error: `Can't find "${entityName}"`
     });
   })
 });

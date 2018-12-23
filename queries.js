@@ -5,12 +5,12 @@ const Query = function() {
 
 }
 
-Query.prototype.getActorId = function (person_name) {
+Query.prototype.getEntityId = function (entityName) {
 
     // returns entity ID for person with that name
 
     var url = wdk.searchEntities({
-      search: person_name,
+      search: entityName,
       format: 'json',
       language: 'en'
     });
@@ -26,11 +26,11 @@ Query.prototype.getActorId = function (person_name) {
           body = JSON.parse(body);
           //console.log(body);
           for (var item of body.search) {
-            if (item.label==person_name) {
+            if (item.label==entityName) {
               resolve(item.title);
             }
           }
-          reject(`Can't find ${person_name}`);
+          reject(`Can't find ${entityName}`);
         });
       });
     });
