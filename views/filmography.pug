@@ -24,8 +24,10 @@ html(lang='en')
                 = film.year 
               td 
                 = film.month
-              td(class="filmName")
-                = film.filmName
+                td(class="filmName")
+                  - const linky = "../cast/"+ film.filmName
+                  a(href=linky)
+                      = film.filmName
           -} else {
             tr 
               td
@@ -33,6 +35,8 @@ html(lang='en')
               td 
                 = film.month
               td(class="filmName")
-                = film.filmName
+                - const linky = "../cast/"+ film.filmName
+                a(href=linky)
+                    = film.filmName
           - }            
           - currentYear = year  
