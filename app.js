@@ -18,6 +18,9 @@ app.get("/", (req,res) => {
 });
 
 app.get("/film/:filmname", (req,res) => {
+
+  // returns data claims for a given film (lots of data)
+
   const lookup = new Query();
   const filmName = req.params["filmname"];
   lookup.getEntityId(filmName)
@@ -35,16 +38,29 @@ app.get("/film/:filmname", (req,res) => {
 });
 
 app.get("/film/actors/:filmname", (req,res) => {
+
+  // gets a list of actors in the film
+  // returns an array of wikidata IDs
+
   const lookup = new Query();
   const filmName = req.params["filmname"];
   let knownFilmId = "unknown";
   lookup.getEntityId(filmName)
   .then((filmId) => {
+    // got film id, now look up its data
     knownFilmId = filmId;
     return lookup.getFilmInfoFromId(filmId);
   })
   .then((body) => {
-    res.json(lookup.getActorIdsFromFilmId(knownFilmId, body));
+    // extract the list of actors Ids
+    return lookup.getActorIdsFromFilmId(knownFilmId, body);
+  })
+  .then((actorIdArray) => {
+    // extract an array of actor names and ids
+    return lookup.getActorDataFromIdArray(actorIdArray);
+  })
+  .then((actorData) => {
+    res.json(actorData);
   })
   .catch((err) => {
     res.json({
@@ -53,8 +69,11 @@ app.get("/film/actors/:filmname", (req,res) => {
   })
 });
 
+
 app.get("/id/:entityname", (req,res) => {
-  // gets id for an entiry (actor or film)
+
+  // gets id for an entity (actor or film)
+
   const lookup = new Query();
   const entityName = req.params["entityname"];
   lookup.getEntityId(entityName)
@@ -71,8 +90,11 @@ app.get("/id/:entityname", (req,res) => {
   })
 });
 
+
 app.get("/filmography/:actorname", (req,res) => {
+
   // gets filmography of an actor by name
+
   const lookup = new Query();
   const actorName = req.params["actorname"];
   lookup.getFilmsForActor(actorName)

@@ -15,6 +15,33 @@ Query.prototype.getActorIdsFromFilmId = function (filmId, body) {
   return result;
 };
 
+Query.prototype.getActorDataFromIdArray = function (idArray) {
+
+  // given an array of wikidata ids, returns an array
+  // of ids and labels
+
+  const url = wdk.getEntities({
+    ids: idArray,
+    languages: ['en'],
+    props: ['labels'],
+    format: 'json'
+  });
+
+  return new Promise( (resolve, reject) => {
+    https.get(url, res => {
+      res.setEncoding("utf8");
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("end", () => {
+        body = JSON.parse(body);
+        resolve(body);
+      });
+    });
+  });
+
+};
 
 Query.prototype.getFilmInfoFromId = function (filmId) {
 
