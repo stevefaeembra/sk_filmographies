@@ -20,7 +20,7 @@ Looking up cast of a film
 
 Note that the lookup is case sensitive, and needs to match EXACTLY the name as shown on Wikipedia/Wikidata. You might need to copy and paste from Wikipedia to be sure, especially for films with complex titles like the Star Wars movies :)
 
-![screenshot filmography](./images/screenshot.png)
+![screenshot filmography](./images/screenshot1.png)
 
 endpoint is
 
