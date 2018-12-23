@@ -6,9 +6,11 @@ const Query = function() {
 }
 
 Query.prototype.getActorIdsFromFilmId = function (filmId, body) {
+
   // interested in the claims under P161
   // returns an array with actors' Ids
   // (but not labels sadly)
+
   const result = body.entities[filmId].claims.P161.map((item) => {
     return item.mainsnak.datavalue.value.id;
   })
@@ -43,6 +45,24 @@ Query.prototype.getActorDataFromIdArray = function (idArray) {
 
 };
 
+Query.prototype.simplifyActorData = function (actorIdArray, actorData) {
+
+  // simplifies output from the getActorDataFromIdArray function
+  // returns an array of objects with {actorId, name} e.g.
+  // {actorId:"Q325141", name:"Charles Hawtrey"}
+
+  results = [];
+  actorIdArray.forEach((actorId) => {
+    const actorName = actorData.entities[actorId].labels.en.value;
+    results.push({
+      actorId: actorId,
+      name: actorName
+    });
+  });
+  return results;
+
+};
+
 Query.prototype.getFilmInfoFromId = function (filmId) {
 
   // get known data about a film from its id
@@ -67,6 +87,7 @@ Query.prototype.getFilmInfoFromId = function (filmId) {
     });
   });
 };
+
 
 Query.prototype.getEntityId = function (entityName) {
 
@@ -98,6 +119,7 @@ Query.prototype.getEntityId = function (entityName) {
       });
     });
 };
+
 
 Query.prototype.getFilmsForActorId = function (actorId) {
 

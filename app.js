@@ -44,7 +44,10 @@ app.get("/film/actors/:filmname", (req,res) => {
 
   const lookup = new Query();
   const filmName = req.params["filmname"];
+
   let knownFilmId = "unknown";
+  let knownActorIdArray = [];
+
   lookup.getEntityId(filmName)
   .then((filmId) => {
     // got film id, now look up its data
@@ -57,10 +60,12 @@ app.get("/film/actors/:filmname", (req,res) => {
   })
   .then((actorIdArray) => {
     // extract an array of actor names and ids
+    knownActorIdArray = actorIdArray;
     return lookup.getActorDataFromIdArray(actorIdArray);
   })
   .then((actorData) => {
-    res.json(actorData);
+    const simplifiedActorData = lookup.simplifyActorData(knownActorIdArray, actorData);
+    res.json(simplifiedActorData);
   })
   .catch((err) => {
     res.json({
