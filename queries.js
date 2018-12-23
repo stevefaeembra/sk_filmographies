@@ -5,6 +5,16 @@ const Query = function() {
 
 }
 
+Query.prototype.getActorIdsFromFilmId = function (filmId, body) {
+  // interested in the claims under P161
+  // returns an array with actors' Ids
+  // (but not labels sadly)
+  const result = body.entities[filmId].claims.P161.map((item) => {
+    return item.mainsnak.datavalue.value.id;
+  })
+  return result;
+};
+
 
 Query.prototype.getFilmInfoFromId = function (filmId) {
 
@@ -12,9 +22,9 @@ Query.prototype.getFilmInfoFromId = function (filmId) {
 
   const url = wdk.getEntities({
     ids: [filmId],
-    languages: ['en'], // returns all languages if not specified
-    props: ['info', 'claims'], // returns all data if not specified
-    format: 'json' // defaults to json
+    languages: ['en'],
+    props: ['info', 'claims','labels'],
+    format: 'json'
   });
   return new Promise( (resolve, reject) => {
     https.get(url, res => {

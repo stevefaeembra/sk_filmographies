@@ -29,7 +29,26 @@ app.get("/film/:filmname", (req,res) => {
   })
   .catch((err) => {
     res.json({
-      error: `Can't find "${entityName}"`
+      error: `Can't find "${filmName}"`
+    });
+  })
+});
+
+app.get("/film/actors/:filmname", (req,res) => {
+  const lookup = new Query();
+  const filmName = req.params["filmname"];
+  let knownFilmId = "unknown";
+  lookup.getEntityId(filmName)
+  .then((filmId) => {
+    knownFilmId = filmId;
+    return lookup.getFilmInfoFromId(filmId);
+  })
+  .then((body) => {
+    res.json(lookup.getActorIdsFromFilmId(knownFilmId, body));
+  })
+  .catch((err) => {
+    res.json({
+      error: `Can't find "${filmName}"`
     });
   })
 });
