@@ -16,7 +16,9 @@ html(lang='en')
         - for (var item of data.cast) {
           tr(class="newYear")              
             td
-              = item.name 
+              - const linky = "../filmography/"+ item.name
+              a(href=linky)
+                = item.name 
             td 
               = item.actorId
         - }
