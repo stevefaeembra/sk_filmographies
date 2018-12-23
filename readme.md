@@ -6,6 +6,7 @@ This is a simple Node.js/express app to find the filmographies of Actors using W
 Filmography of an Artist
 ===============================
 
+![screenshot filmography](./images/screenshot1.png)
 
 Endpoint is
 
@@ -20,7 +21,7 @@ Looking up cast of a film
 
 Note that the lookup is case sensitive, and needs to match EXACTLY the name as shown on Wikipedia/Wikidata. You might need to copy and paste from Wikipedia to be sure, especially for films with complex titles like the Star Wars movies :)
 
-![screenshot filmography](./images/screenshot1.png)
+![screenshot filmography](./images/screenshot2.png)
 
 endpoint is
 
