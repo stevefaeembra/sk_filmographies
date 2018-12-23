@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+  head
+   title WikiData Film API by Stevefaeembra
+   link(rel="stylesheet" href="../css/style.css")
+  body
+    h1
+      = "Cast of "+data.name
+    table
+      thead
+        th
+          | Name
+        th
+          | WikiData ID
+      tbody
+        - for (var item of data.cast) {
+          tr(class="newYear")              
+            td
+              = item.name 
+            td 
+              = item.actorId
+        - }

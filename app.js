@@ -37,7 +37,7 @@ app.get("/film/:filmname", (req,res) => {
   })
 });
 
-app.get("/film/actors/:filmname", (req,res) => {
+app.get("/cast/:filmname", (req,res) => {
 
   // gets a list of actors in the film
   // returns an array of wikidata IDs
@@ -65,7 +65,11 @@ app.get("/film/actors/:filmname", (req,res) => {
   })
   .then((actorData) => {
     const simplifiedActorData = lookup.simplifyActorData(knownActorIdArray, actorData);
-    res.json(simplifiedActorData);
+    const data = {
+      name: filmName,
+      cast: simplifiedActorData
+    };
+    res.render("cast", {data: data});
   })
   .catch((err) => {
     res.json({
