@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public'));
 // endpoints
 
 app.get("/", (req,res) => {
-  res.render("homepage",{});
+  res.render("form",{});
 });
 
 app.get("/film/:filmname", (req,res) => {
@@ -101,12 +101,13 @@ app.get("/id/:entityname", (req,res) => {
 });
 
 
-app.get("/filmography/:actorname", (req,res) => {
+app.get("/filmography", (req,res) => {
 
   // gets filmography of an actor by name
 
   const lookup = new Query();
-  const actorName = req.params["actorname"];
+  const actorName = req.query["actorName"];
+  console.log(`Look up ${actorName}`);
   lookup.getFilmsForActor(actorName)
   .then((data) => {
     res.render("filmography",{data:data});

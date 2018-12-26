@@ -1,0 +1,17 @@
+html(lang='en')
+  head
+   title WikiData Film API by Stevefaeembra
+   link(rel="stylesheet" href="../css/style.css")
+  body
+    h1
+      = "WikiData Filmography"
+    hr
+    h2
+      = "Lookup filmography of actor"
+    form(class="form-filmography" method="GET" action="/filmography")
+      div(class="form-row")
+        label(for="actorName")
+          | Actor name 
+        input(type="text" id="actorName" name="actorName")
+      div(class="form-row")
+        input(type="submit" name="submit" text="submit")
