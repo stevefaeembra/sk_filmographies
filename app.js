@@ -11,6 +11,8 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
+const port = process.env.PORT || 3000;
+
 // endpoints
 
 app.get("/", (req,res) => {
@@ -118,4 +120,4 @@ app.get("/filmography", (req,res) => {
 });
 
 
-app.listen(3000, () => console.log('Started listening on 3000!'));
+app.listen(port, () => console.log('Started listening on ${port}!'));
