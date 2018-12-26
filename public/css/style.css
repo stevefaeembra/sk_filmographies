@@ -10,7 +10,8 @@ html {
 }
 
 body {
-
+  width:90%;
+  margin:0 auto;
 }
 
 h1 {
@@ -50,4 +51,20 @@ tr.newYear td {
   /* height: 10px; */
   border-top: 2px solid black;
   margin-right: 1rem;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+label, input {
+  font-size: 1.5rem;
+}
+
+.form-row {
+  margin: 0.5rem 0;
+}
+
+p {
+  margin-bottom: 1rem;
 }
