@@ -37,14 +37,14 @@ app.get("/film/:filmname", (req,res) => {
   })
 });
 
-app.get("/cast/:filmname", (req,res) => {
+app.get("/cast", (req,res) => {
 
   // finds actors for the given film name
   // film name is case sensitive and needs to match exactly the
   // name in wikipedia
 
   const lookup = new Query();
-  const filmName = req.params["filmname"];
+  const filmName = req.query["filmName"];
 
   let knownFilmId = "unknown";
   let knownActorIdArray = [];
