@@ -25,7 +25,7 @@ html(lang='en')
               td 
                 = film.month
                 td(class="filmName")
-                  - const linky = "../cast/"+ film.filmName
+                  - const linky = "../cast?filmName="+ film.filmName
                   a(href=linky)
                       = film.filmName
           -} else {
@@ -35,7 +35,7 @@ html(lang='en')
               td 
                 = film.month
               td(class="filmName")
-                - const linky = "../cast/"+ film.filmName
+                - const linky = "../cast?filmName="+ film.filmName
                 a(href=linky)
                     = film.filmName
           - }            
